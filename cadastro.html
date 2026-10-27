@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cadastro</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    form { display: flex; flex-direction: column; gap: 10px; max-width: 350px; }
+    input, select, button { padding: 8px; }
+    table { margin-top: 20px; border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid gray; padding: 8px; text-align: left; }
+    pre { background-color: #eee; padding: 10px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>Cadastro de alunos</h1>
+  <form id="formulario">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="idade">Idade:</label>
+    <input type="number" id="idade" name="idade" min="1" max="120" required>
+
+    <label for="curso">Curso:</label>
+    <select id="curso" name="curso" required>
+      <option value="">Selecione um curso</option>
+      <option value="Engenharia da Computação">Engenharia da Computação</option>
+      <option value="Ciência da Computação">Ciência da Computação</option>
+      <option value="Sistemas de Informação">Sistemas de Informação</option>
+    </select>
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <h2>Dados em JSON</h2>
+  <pre id="json"></pre>
+
+  <table>
+    <thead>
+      <tr><th>Nome</th><th>E-mail</th><th>Idade</th><th>Curso</th></tr>
+    </thead>
+    <tbody id="cadastros"></tbody>
+  </table>
+
+  <script>
+    const formulario = document.getElementById("formulario");
+
+    formulario.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const dados = new FormData(formulario);
+      const objeto = {};
+
+      // Cada campo do formulário vira uma propriedade do objeto.
+      for (const [campo, valor] of dados) {
+        objeto[campo] = valor;
+      }
+
+      document.getElementById("json").textContent = JSON.stringify(objeto, null, 2);
+
+      const linha = document.createElement("tr");
+      const valores = [objeto.nome, objeto.email, objeto.idade, objeto.curso];
+
+      for (const valor of valores) {
+        const coluna = document.createElement("td");
+        coluna.textContent = valor;
+        linha.appendChild(coluna);
+      }
+
+      document.getElementById("cadastros").appendChild(linha);
+    });
+  </script>
+</body>
+</html>
