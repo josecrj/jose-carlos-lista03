@@ -6,7 +6,7 @@ formulario.addEventListener("submit", function (evento) {
   const dados = new FormData(formulario);
   const objeto = {};
 
-  // Cada campo do formulário vira uma propriedade do objeto.
+
   for (const [campo, valor] of dados) {
     objeto[campo] = valor;
   }
