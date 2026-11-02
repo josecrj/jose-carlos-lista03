@@ -9,7 +9,6 @@ const usuarios = [
 const cards = document.getElementById("cards");
 
 
-// Cria um card para cada usuário.
 for (const usuario of usuarios) {
   const card = document.createElement("div");
   card.className = "card";
