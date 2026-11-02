@@ -18,7 +18,6 @@ document.getElementById("buscar").addEventListener("click", function () {
     return;
   }
 
-  // Converte o valor do campo para número antes de comparar.
   const id = Number(campo.value);
   const post = posts.find(function (post) {
     return post.id === id;
